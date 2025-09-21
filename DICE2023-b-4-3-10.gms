@@ -4,7 +4,7 @@ $offtext
 
 $title October 12, 2023 (DICE2023-b-4-3-10.gms)
 
-set        t  Time periods (5 years per period)                   /1*81/
+set        t  Time periods (5 years per period)                   /1*15/
 PARAMETERS
 ** If optimal control
         ifopt    Indicator where optimized is 1 and base is 0     /1/
@@ -193,6 +193,7 @@ K.LO(t)         = 1;
 C.LO(t)         = 2;
 CPC.LO(t)       = .01;
 RFACTLONG.lo(t) =.0001;
+CCATOT.up(t)    = 1000;
 *set lag10(t) ;
 *lag10(t)                =  yes$(t.val gt card(t)-10);
 *S.FX(lag10(t))          = optlrsav;
