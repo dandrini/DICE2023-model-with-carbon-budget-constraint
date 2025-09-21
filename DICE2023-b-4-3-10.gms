@@ -173,6 +173,8 @@ $include Include\FAIR-beta-4-3-1.gms
  mcabateeq(t)..       MCABATE(t)     =E= pbacktime(t) * MIU(t)**(expcost2-1);
  carbpriceeq(t)..     CPRICE(t)      =E= pbacktime(t) * (MIU(t))**(expcost2-1);
  constCO2eq(t)..      CCATOT(t)      =L= 1000;
+* constCO2eq..      CCATOT('17')      =L= 1000;
+ 
 **Economic variables
  ygrosseq(t)..        YGROSS(t)      =E= (AL(t)*(L(t)/1000)**(1-gama))*(K(t)**gama);
  yneteq(t)..          YNET(t)        =E= YGROSS(t)*(1-damfrac(t));
@@ -196,6 +198,7 @@ C.LO(t)         = 2;
 CPC.LO(t)       = .01;
 RFACTLONG.lo(t) =.0001;
 * CCATOT.up(t)    = 1000;
+* CCATOT.up('17')    = 1000;
 *set lag10(t) ;
 *lag10(t)                =  yes$(t.val gt card(t)-10);
 *S.FX(lag10(t))          = optlrsav;
