@@ -4,7 +4,7 @@ $offtext
 
 $title October 12, 2023 (DICE2023-b-4-3-10.gms)
 
-set        t  Time periods (5 years per period)                   /1*15/
+set        t  Time periods (5 years per period)                   /1*17/
 PARAMETERS
 ** If optimal control
         ifopt    Indicator where optimized is 1 and base is 0     /1/
@@ -140,6 +140,7 @@ EQUATIONS
         ABATEEQ(t)       Cost of emissions reductions equation
         MCABATEEQ(t)     Equation for MC abatement
         CARBPRICEEQ(t)   Carbon price equation from abatement
+        CONSTCO2EQ(t)    Constraint on cumulative total carbon emissions (CCATOT)
 *Economic variables
         YGROSSEQ(t)      Output gross equation
         YNETEQ(t)        Output net of damages equation
@@ -171,6 +172,7 @@ $include Include\FAIR-beta-4-3-1.gms
  abateeq(T)..         ABATECOST(T)   =E= YGROSS(T) * COST1TOT(T) * (MIU(T)**EXPCOST2);
  mcabateeq(t)..       MCABATE(t)     =E= pbacktime(t) * MIU(t)**(expcost2-1);
  carbpriceeq(t)..     CPRICE(t)      =E= pbacktime(t) * (MIU(t))**(expcost2-1);
+ constCO2eq(t)..      CCATOT(t)      =L= 1000;
 **Economic variables
  ygrosseq(t)..        YGROSS(t)      =E= (AL(t)*(L(t)/1000)**(1-gama))*(K(t)**gama);
  yneteq(t)..          YNET(t)        =E= YGROSS(t)*(1-damfrac(t));
@@ -193,7 +195,7 @@ K.LO(t)         = 1;
 C.LO(t)         = 2;
 CPC.LO(t)       = .01;
 RFACTLONG.lo(t) =.0001;
-CCATOT.up(t)    = 1000;
+* CCATOT.up(t)    = 1000;
 *set lag10(t) ;
 *lag10(t)                =  yes$(t.val gt card(t)-10);
 *S.FX(lag10(t))          = optlrsav;
